@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <link rel="stylesheet" href="todo.css"> <!-- Link to external CSS file -->
+    <!-- Correct Font Awesome 4.7.0 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="newtask">
+            <input type="text" id="task-input" placeholder="Task To Be Done......">
+            <button id="push">Add</button>
+        </div>
+        <div id="task-list"></div>
+    </div>
+
+    <script>
+        document.querySelector('#push').onclick = function () {
+            const taskInput = document.querySelector('#task-input');
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue.length === 0) {
+                alert("Please enter a task");
+            } else {
+                // Create a new task element
+                const taskElement = document.createElement('div');
+                taskElement.classList.add('tasks');
+
+                taskElement.innerHTML = `
+                    <span>${taskValue}</span>
+                    <button class="delete">
+                        <i class="fa fa-trash" aria-hidden="true"></i> <!-- Font Awesome 4.7.0 trash icon -->
+                    </button>
+                `;
+
+                // Append the new task to the task list
+                document.querySelector('#task-list').appendChild(taskElement);
+
+                // Clear the input field
+                taskInput.value = '';
+
+                // Add delete functionality to the delete button
+                taskElement.querySelector('.delete').onclick = function () {
+                    taskElement.remove();
+                };
+            }
+        };
+    </script>
+</body>
+</html>
